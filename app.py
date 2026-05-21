@@ -41,6 +41,23 @@ def insert():
     return redirect(url_for('read'))
 
 
+@app.route("/update" ,methods=["POST"])
+def update():
+    conection = connect_db()
+    cursor = conection.cursor()
+
+    name = request.form['update_name']
+    age = request.form['update_age']
+    gender = request.form['update_gender']
+    id = request.form['update_id']
+
+    sql  = "UPDATE students SET name = %s,age =%s,gender= %s  WHERE id = %s"
+    cursor.execute(sql,(name,age,gender,id))
+    conection.commit()
+
+    return redirect(url_for('read'))
+
+
 if __name__=="__main__":
     app.run(debug=True)
 

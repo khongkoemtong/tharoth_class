@@ -44,12 +44,13 @@
     </div>
 
 
-    <table border="" class="table table-hover table-bordered w-75" align="center" cellspacing="0" width="900px" cellpadding="15px">
+    <table border="" class="table text-center table-hover table-bordered w-75" align="center" cellspacing="0" width="900px" cellpadding="15px">
         <tr>
             <th>ID</th>
             <th>NAME</th>
             <th>AGE</th>
             <th>GENDER</th>
+            <th>Action</th>
         </tr>
 
           {%  for mydata  in mystudent  %}
@@ -59,8 +60,45 @@
             <th>{{mydata[1]}}</th>
             <th>{{mydata[2]}}</th>
             <th>{{mydata[3]}}</th>
+            <th>
+                <button class="btn btn-warning" data-bs-target="#update{{mydata[0]}}" data-bs-toggle="modal">UPDATE</button>
+                <button class="btn btn-danger">DELETE</button>
+            </th>
 
           </tr>
+
+
+
+
+           <div class="modal fade" id="update{{mydata[0]}}">
+        <div class="modal-dialog">
+            <div class="modal-content">
+               
+                <form action="/update" method="post"  class="p-4">
+                     <p class="text-center fs-3 fw-bold ">Add Student </p>
+                     <input type="hidden" name="update_id" value="{{mydata[0]}}">
+                    <div>
+                        <label for="" class="form-label">Enter name </label>
+                        <input name="update_name" value="{{mydata[1]}}" class="form-control" type="text">
+                    </div>
+                     <div>
+                        <label for="" class="form-label">Enter age </label>
+                        <input name="update_age" value="{{mydata[2]}}" class="form-control" type="text">
+                    </div>
+                     <div>
+                        <label for="" class="form-label">Enter gender </label>
+                        <input name="update_gender" value="{{mydata[3]}}" class="form-control" type="text">
+                    </div>
+
+
+                    <div class="mt-3">
+                        <button class="btn btn-danger ">Cancel</button>
+                        <button class="btn btn-primary" type="submit">Submit</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
 
 
 
